@@ -1,0 +1,5 @@
+Gemaakt op: 11-02-2015
+---------------------------
+- Code standaard zoeken (Link in bladwijzers->School->PO->Game Project)
+- Odijk uitnodiging sturen voor klantgesprek (via e-mail)
+- Game wordt: Lode Runner. Info over zoeken en zelf spelen.

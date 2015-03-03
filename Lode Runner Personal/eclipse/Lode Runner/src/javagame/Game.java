@@ -10,6 +10,7 @@ public class Game extends StateBasedGame{
 	public static final int play = 1;
 	public static final int options = 2;
 	public static final int credits = 3;
+	public static final int score = 4;
 
 	public Game(String gamename){
 		super(gamename);
@@ -17,6 +18,7 @@ public class Game extends StateBasedGame{
 		this.addState(new Play(play));
 		this.addState(new Options(options));
 		this.addState(new Credits(credits));
+		this.addState(new Score(score));
 	}
 	
 	public void initStatesList(GameContainer gc) throws SlickException{
@@ -24,6 +26,7 @@ public class Game extends StateBasedGame{
 		this.getState(play).init(gc, this);
 		this.getState(options).init(gc, this);
 		this.getState(credits).init(gc, this);
+		this.getState(score).init(gc, this);
 		this.enterState(menu);
 	}
 	

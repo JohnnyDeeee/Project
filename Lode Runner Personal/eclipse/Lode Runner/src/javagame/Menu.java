@@ -44,6 +44,7 @@ public class Menu extends BasicGameState{
 		}
 		if (input.isKeyPressed(Input.KEY_O)){ sbg.enterState(2); } //change state to options
 		if (input.isKeyPressed(Input.KEY_C)){ sbg.enterState(3); } //change state to credits
+		if (input.isKeyPressed(Input.KEY_S)){ sbg.enterState(4); } //change state to score DEBUG
 	}
 	
 	public int getID(){

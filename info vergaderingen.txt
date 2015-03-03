@@ -19,4 +19,4 @@ Planning na 1e vergadering 18-02-2015
 
 4 maart = Nieuwe vergadering
 
-NOTES: Vergadering opgenomen: "18 feb 2015 vergadering"
+NOTES: Vergadering opgenomen: "18 feb 2015 vergadering".

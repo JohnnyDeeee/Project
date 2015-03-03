@@ -24,7 +24,7 @@ public class Menu extends BasicGameState{
 		g.setBackground(Color.lightGray);
 		
 		intro.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
-		g.drawString(mouse, 300, 330); //somehow y=330 appears on y=30 ...
+		g.drawString(mouse, 300, 530); //somehow y=330 appears on y=30 ...
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
@@ -38,13 +38,13 @@ public class Menu extends BasicGameState{
 		if (Mouse.isInsideWindow()){
 			mouse = "X: " + xpos + " Y: " + ypos;
 			if (input.isMousePressed(0)){ sbg.enterState(1); } //change state to play
-			if (input.isKeyPressed(Input.KEY_O)){ sbg.enterState(2); } //change state to options
-			if (input.isKeyPressed(Input.KEY_C)){ sbg.enterState(3); } //change state to credits
 		}
 		else
 		{
 			mouse = "Get yo mouse in this screen!";
 		}
+		if (input.isKeyPressed(Input.KEY_O)){ sbg.enterState(2); } //change state to options
+		if (input.isKeyPressed(Input.KEY_C)){ sbg.enterState(3); } //change state to credits
 	}
 	
 	public int getID(){

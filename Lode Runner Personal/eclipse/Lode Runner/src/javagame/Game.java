@@ -5,7 +5,8 @@ import org.newdawn.slick.state.*;
 
 public class Game extends StateBasedGame{
 	
-	public static final String gamename = "Lode Runner";
+	public static final String gameversion = "v0.01";
+	public static final String gamename = "Lode Runner" + " " + gameversion;
 	public static final int menu = 0;
 	public static final int play = 1;
 	public static final int options = 2;

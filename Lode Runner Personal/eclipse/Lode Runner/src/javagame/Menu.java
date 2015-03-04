@@ -23,13 +23,13 @@ public class Menu extends BasicGameState{
 		g.setBackground(Color.lightGray);
 		
 		intro.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
-		g.drawString(mouse, 300, 530); //somehow y=330 appears on y=30 ...
+		g.drawString(mouse, 300, 530); //graphic 0,0 is in top left corner
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
 		//Keyboard/Mouse input
 		Input input = gc.getInput();
-		int xpos = Mouse.getX();
+		int xpos = Mouse.getX(); //mouse 0,0 is in bottom left corner
 		int ypos = Mouse.getY();
 
 		

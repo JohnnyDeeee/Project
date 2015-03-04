@@ -1,5 +1,7 @@
 TO-DO
 ----------------
 
-	- Create dynamic text on Menu screen for keys to be able to change them in Option screen
-	- Create HUD (Score, Men, Level) in Play screen
+	- Create dynamic text on Menu screen for keys to be able to change them in Option screen (COULD)
+	- Create HUD (Score, Men, Level) in Play screen (MUST)
+	- Create Animations for Player (MUST)
+	- Create Animations for AI (MUST)

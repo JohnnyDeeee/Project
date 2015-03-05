@@ -7,7 +7,7 @@ import org.newdawn.slick.state.*;
 public class Menu extends BasicGameState{
 	
 	public String mouse = "Get yo mouse in this screen!";
-	Image intro;
+	Image menuBackground;
 	
 	public Menu(int state){
 		
@@ -16,13 +16,13 @@ public class Menu extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		gc.setShowFPS(false);
 		
-		intro = new Image("res/intro.png");
+		menuBackground = new Image("res/intro.png");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		g.setBackground(Color.lightGray);
 		
-		intro.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
+		menuBackground.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
 		g.drawString(mouse, 300, 530); //graphic 0,0 is in top left corner
 	}
 	
@@ -44,7 +44,7 @@ public class Menu extends BasicGameState{
 		}
 		if (input.isKeyPressed(Input.KEY_O)){ sbg.enterState(2); } //change state to options
 		if (input.isKeyPressed(Input.KEY_C)){ sbg.enterState(3); } //change state to credits
-		if (input.isKeyPressed(Input.KEY_S)){ sbg.enterState(4); } //change state to score DEBUG
+		if (input.isKeyPressed(Input.KEY_S)){ sbg.enterState(4); } //change state to score
 	}
 	
 	public int getID(){

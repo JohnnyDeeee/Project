@@ -1,0 +1,12 @@
+Notulisten:
+	- Rob
+	- Martijn
+	- Erwin
+
+Planning:
+	- Gerben
+	- Marijn
+
+Voorzitter:
+	- Rutger
+	- Valentijn

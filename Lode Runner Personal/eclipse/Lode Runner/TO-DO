@@ -5,3 +5,7 @@ TO-DO
 	- Create HUD (Score, Men, Level) in Play screen (MUST)
 	- Create Animations for Player (MUST)
 	- Create Animations for AI (MUST)
+	- Create class for font/color (SHOULD)
+	
+NOTES:	Check https://www.youtube.com/watch?v=QYEg_GQT-zw on AI programming
+		Check enterState(id, leave, enter)

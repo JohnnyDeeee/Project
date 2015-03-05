@@ -1,0 +1,24 @@
+Notulisten:
+	- Rob
+	- Martijn
+	- Erwin
+
+Planning:
+	- Gerben
+	- Marijn
+
+Voorzitter:
+	- Rutger
+	- Valentijn
+
+Cloud: google drive
+
+Schermen:
+	- Homepage (info over ladder, gegevens invoeren)
+	- Email
+	- Download pagina
+
+	- Main Menu
+	- Inlog
+	- Scorebord
+	- Game

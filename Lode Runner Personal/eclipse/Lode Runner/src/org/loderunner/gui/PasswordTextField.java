@@ -1,4 +1,4 @@
-package org.newdawn.slick.gui;
+package org.loderunner.gui;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.gui.ComponentListener;

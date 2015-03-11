@@ -1,5 +1,10 @@
-package javagame;
+package org.loderunner.game;
 
+import org.loderunner.screens.Credits;
+import org.loderunner.screens.Menu;
+import org.loderunner.screens.Options;
+import org.loderunner.screens.Play;
+import org.loderunner.screens.Score;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 

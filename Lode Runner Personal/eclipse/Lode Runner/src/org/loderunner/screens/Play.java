@@ -1,18 +1,19 @@
-package javagame;
+package org.loderunner.screens;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.*;
 
-public class Score extends BasicGameState{
+public class Play extends BasicGameState{
 	
 	UnicodeFont uiFont;
 	private Color uiBlue = new Color(72,104,247);
 	private Color uiRed = new Color(176,32,32);
 	
-	Image scoreBackground;
+	private int playerScore;
+
 	
-	public Score(int state){
+	public Play(int state){
 		
 	}
 	
@@ -26,24 +27,25 @@ public class Score extends BasicGameState{
 		uiFont.getEffects().add(new ColorEffect());
 		uiFont.loadGlyphs();
 		
-		scoreBackground = new Image("res/Highscores.png");
+		playerScore = 0000000;
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		scoreBackground.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
+		g.setBackground(Color.black);
 		
-		uiFont.drawString(100, 100, "Score: ", uiBlue);
-		//uiFont.drawString(250, 100, Integer.toString(playerScore), uiRed);
+		//Draw string in specified font
+		uiFont.drawString(100, 500, "SCORE", uiBlue);
+		uiFont.drawString(250, 500, Integer.toString(playerScore), uiRed);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
-		//Keyboard/Mouse input
 		Input input = gc.getInput();
-				
-		if (input.isKeyPressed(Input.KEY_BACK)){ sbg.enterState(0); } //change state to menu
+		
+		if (input.isKeyPressed(Input.KEY_BACK)){ sbg.enterState(0);  } //change state to menu
+		//if (input.isKeyPressed(Input.KEY_ENTER)){ sbg.enterState(4, leave, enter);  } //change state with transition
 	}
 	
 	public int getID(){
-		return 4;
+		return 1;
 	}
 }

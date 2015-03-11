@@ -1,9 +1,10 @@
-package javagame;
+package org.loderunner.screens;
 
+import org.loderunner.gui.PasswordTextField;
+import org.loderunner.table.Account;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
-import org.newdawn.slick.gui.PasswordTextField;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.*;
 
@@ -86,7 +87,6 @@ public class Menu extends BasicGameState{
 		else if (pass.hasFocus()){
 			if (input.isKeyPressed(Input.KEY_ENTER)){
 				saveUser(login.getText(), pass.getText());
-				System.out.println(String.format("Username: " + username + "%nPassword: " + password));
 			}
 			else if (input.isKeyPressed(Input.KEY_UP)){
 				login.setFocus(true);
@@ -105,7 +105,7 @@ public class Menu extends BasicGameState{
 	}
 	
 	public void saveUser(String username, String password){
-		this.username = username;
-		this.password = password;
+		Account ac = new Account(username, password);
+		System.out.println("Username: " + ac.getUsername() + " Password: " + ac.getPassword() + " Score: " + ac.getScore()); //DEBUG
 	}
 }

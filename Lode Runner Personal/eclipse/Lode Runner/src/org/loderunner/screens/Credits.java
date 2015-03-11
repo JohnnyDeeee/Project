@@ -1,24 +1,24 @@
-package javagame;
+package org.loderunner.screens;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-public class Options extends BasicGameState{
+public class Credits extends BasicGameState{
 	
-	Image optionsBackground;
+	Image creditsBackground;
 	
-	public Options(int state){
+	public Credits(int state){
 		
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		gc.setShowFPS(false);
 		
-		optionsBackground = new Image("res/Options.png");
+		creditsBackground = new Image("res/Credits.png");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		optionsBackground.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
+		creditsBackground.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
@@ -29,6 +29,6 @@ public class Options extends BasicGameState{
 	}
 	
 	public int getID(){
-		return 2;
+		return 3;
 	}
 }

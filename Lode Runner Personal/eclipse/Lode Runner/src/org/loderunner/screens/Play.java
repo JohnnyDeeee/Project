@@ -27,7 +27,7 @@ public class Play extends BasicGameState{
 		uiFont.getEffects().add(new ColorEffect());
 		uiFont.loadGlyphs();
 		
-		playerScore = 0000000;
+		playerScore = 0;
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{

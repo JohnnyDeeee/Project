@@ -7,6 +7,9 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.BlobbyTransition;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.HorizontalSplitTransition;
 
 public class Menu extends BasicGameState{
 	
@@ -85,12 +88,13 @@ public class Menu extends BasicGameState{
 			}
 		}
 		else if (pass.hasFocus()){
-			if (input.isKeyPressed(Input.KEY_ENTER)){
-				saveUser(login.getText(), pass.getText());
-			}
-			else if (input.isKeyPressed(Input.KEY_UP)){
+			if (input.isKeyPressed(Input.KEY_UP)){
 				login.setFocus(true);
 			}
+		}
+		if (input.isKeyPressed(Input.KEY_ENTER) && login.getText() != "" && login.getText() != ""){
+			saveUser(login.getText(), pass.getText());
+			sbg.enterState(1, new EmptyTransition(), new BlobbyTransition(Color.black));
 		}
 		
 		
@@ -106,6 +110,7 @@ public class Menu extends BasicGameState{
 	
 	public void saveUser(String username, String password){
 		Account ac = new Account(username, password);
-		System.out.println("Username: " + ac.getUsername() + " Password: " + ac.getPassword() + " Score: " + ac.getScore()); //DEBUG
+		ac.writeToFile(ac);
+		//System.out.println("Username: " + ac.getUsername() + " Password: " + ac.getPassword() + " Score: " + ac.getScore()); //DEBUG
 	}
 }

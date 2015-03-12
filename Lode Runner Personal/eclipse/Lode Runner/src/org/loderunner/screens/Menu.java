@@ -1,5 +1,7 @@
 package org.loderunner.screens;
 
+import javax.swing.JOptionPane;
+
 import org.loderunner.gui.PasswordTextField;
 import org.loderunner.table.Account;
 import org.lwjgl.input.Mouse;
@@ -18,8 +20,6 @@ public class Menu extends BasicGameState{
 	private TextField login;
 	private PasswordTextField pass;
 	
-	private String username;
-	private String password;
 	
 	private UnicodeFont uiFont;
 	private Color uiBlue = new Color(72,104,247);
@@ -93,14 +93,15 @@ public class Menu extends BasicGameState{
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ENTER) && login.getText() != "" && login.getText() != ""){
-			saveUser(login.getText(), pass.getText());
-			sbg.enterState(1, new EmptyTransition(), new BlobbyTransition(Color.black));
+			saveUser(login.getText(), pass.getText(), sbg);
 		}
 		
-		
-		//if (input.isKeyPressed(Input.KEY_O)){ sbg.enterState(2); } //change state to options
-		//if (input.isKeyPressed(Input.KEY_C)){ sbg.enterState(3); } //change state to credits
-		//if (input.isKeyPressed(Input.KEY_S)){ sbg.enterState(4); } //change state to score
+		if (input.isKeyDown(Input.KEY_LALT)){
+			if (input.isKeyDown(Input.KEY_O)){ sbg.enterState(2); } //change state to options
+			if (input.isKeyDown(Input.KEY_C)){ sbg.enterState(3); } //change state to credits
+			if (input.isKeyDown(Input.KEY_S)){ sbg.enterState(4); } //change state to score
+		}
+
 		
 	}
 	
@@ -108,9 +109,15 @@ public class Menu extends BasicGameState{
 		return 0;
 	}
 	
-	public void saveUser(String username, String password){
+	public void saveUser(String username, String password, StateBasedGame sbg){
 		Account ac = new Account(username, password);
-		ac.writeToFile(ac);
-		ac.readFromFile(""); //DEBUG
+		
+		if (!ac.accountExists(username)){
+			ac.writeToFile(ac);
+			sbg.enterState(1, new EmptyTransition(), new BlobbyTransition(Color.black));
+		}else{
+			JOptionPane.showMessageDialog(null, "This username already exists, please enter a differen username.", "Oops something went wrong! ", JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 }

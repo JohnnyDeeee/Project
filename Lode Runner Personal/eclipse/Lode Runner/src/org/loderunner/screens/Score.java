@@ -40,7 +40,7 @@ public class Score extends BasicGameState{
 		//Keyboard/Mouse input
 		Input input = gc.getInput();
 				
-		if (input.isKeyPressed(Input.KEY_BACK)){ sbg.enterState(0); } //change state to menu
+		if (input.isKeyDown(Input.KEY_BACK)){ sbg.enterState(0); } //change state to menu
 	}
 	
 	public int getID(){

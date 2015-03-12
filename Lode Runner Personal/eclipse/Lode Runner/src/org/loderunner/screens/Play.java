@@ -41,8 +41,7 @@ public class Play extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
 		Input input = gc.getInput();
 		
-		if (input.isKeyPressed(Input.KEY_BACK)){ sbg.enterState(0);  } //change state to menu
-		//if (input.isKeyPressed(Input.KEY_ENTER)){ sbg.enterState(4, leave, enter);  } //change state with transition
+		//if (input.isKeyPressed(Input.KEY_BACK)){ sbg.enterState(0);  } //change state to menu
 	}
 	
 	public int getID(){

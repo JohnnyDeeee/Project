@@ -15,4 +15,4 @@ NOTES:	Check https://www.youtube.com/watch?v=QYEg_GQT-zw on AI programming
 DOING:
 ----------------
 - Find a way to call account info in Score from Account.java (create a readFromFile method)
-	-- Create read from '<' untill '>' when username was found (saving syntax <USERNAME|PASSWORD|SCORE>)
+	-- After succesfull login play state goes back to login

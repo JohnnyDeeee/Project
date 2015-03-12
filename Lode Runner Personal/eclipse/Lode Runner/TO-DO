@@ -15,4 +15,3 @@ NOTES:	Check https://www.youtube.com/watch?v=QYEg_GQT-zw on AI programming
 DOING:
 ----------------
 - Find a way to call account info in Score from Account.java (create a readFromFile method)
-	-- After succesfull login play state goes back to login

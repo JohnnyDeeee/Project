@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 
 import org.loderunner.gui.PasswordTextField;
 import org.loderunner.table.Account;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
@@ -56,7 +58,7 @@ public class Menu extends BasicGameState{
 		pass.setTextColor(uiRed);
 	}
 	
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{		
 		//background
 		g.setBackground(Color.lightGray);
 		menuBackground.draw(0, 0, gc.getWidth(), gc.getHeight(), Color.white);
@@ -74,6 +76,13 @@ public class Menu extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
 		//Keyboard input
 		Input input = gc.getInput();
+		
+		//Hide mouse if it is in window
+		if (Mouse.isInsideWindow()){
+			//Hide mouse
+		}else{
+			//Show mouse
+		}
 
 		//Action keys in TextFields
 		if (login.hasFocus()){

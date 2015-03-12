@@ -111,6 +111,6 @@ public class Menu extends BasicGameState{
 	public void saveUser(String username, String password){
 		Account ac = new Account(username, password);
 		ac.writeToFile(ac);
-		//System.out.println("Username: " + ac.getUsername() + " Password: " + ac.getPassword() + " Score: " + ac.getScore()); //DEBUG
+		ac.readFromFile(""); //DEBUG
 	}
 }

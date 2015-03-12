@@ -6,7 +6,6 @@ TO-DO
 	- Create Animations for Player (MUST)
 	- Create Animations for AI (MUST)
 	- Create class for font/color (COULD)
-	- Find a way to call account info in Score from Account.java (create a readFromFile method)
 	- Create Register and Login
 	- Save score to account
 	
@@ -15,3 +14,5 @@ NOTES:	Check https://www.youtube.com/watch?v=QYEg_GQT-zw on AI programming
 		
 DOING:
 ----------------
+- Find a way to call account info in Score from Account.java (create a readFromFile method)
+	-- Create read from '<' untill '>' when username was found (saving syntax <USERNAME|PASSWORD|SCORE>)

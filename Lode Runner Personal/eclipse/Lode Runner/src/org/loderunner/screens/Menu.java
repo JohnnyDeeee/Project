@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import org.loderunner.gui.PasswordTextField;
 import org.loderunner.table.Account;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
@@ -22,10 +23,11 @@ public class Menu extends BasicGameState{
 	private TextField login;
 	private PasswordTextField pass;
 	
-	
 	private UnicodeFont uiFont;
 	private Color uiBlue = new Color(72,104,247);
 	private Color uiRed = new Color(176,32,32);
+	
+	private Play play = new Play(1);
 	
 	public Menu(int state){
 		
@@ -79,9 +81,9 @@ public class Menu extends BasicGameState{
 		
 		//Hide mouse if it is in window
 		if (Mouse.isInsideWindow()){
-			//Hide mouse
+			hideMouseCursor(true);
 		}else{
-			//Show mouse
+			hideMouseCursor(false);
 		}
 
 		//Action keys in TextFields
@@ -123,10 +125,26 @@ public class Menu extends BasicGameState{
 		
 		if (!ac.accountExists(username)){
 			ac.writeToFile(ac);
+			//pass info to play.java
 			sbg.enterState(1, new EmptyTransition(), new BlobbyTransition(Color.black));
 		}else{
-			JOptionPane.showMessageDialog(null, "This username already exists, please enter a differen username.", "Oops something went wrong! ", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "This username already exists, please enter a different username.", "Oops something went wrong! ", JOptionPane.ERROR_MESSAGE);
 		}
 		
+	}
+	
+	private void hideMouseCursor(Boolean hide){
+		Cursor emptyCursor;
+		
+		try {
+			if (hide){
+				emptyCursor = new Cursor(1, 1, 0, 0, 1, BufferUtils.createIntBuffer(1), null);
+				Mouse.setNativeCursor(emptyCursor);
+			}else{
+				Mouse.setNativeCursor(null);
+			}
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
 	}
 }

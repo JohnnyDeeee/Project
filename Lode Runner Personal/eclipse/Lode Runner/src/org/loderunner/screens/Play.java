@@ -43,22 +43,20 @@ public class Play extends BasicGameState{
 		
 		if (input.isKeyDown(Input.KEY_UP)){ playerScore += 1; } //DEBUG
 		if (input.isKeyDown(Input.KEY_DOWN)){ playerScore -= 1; } //DEBUG
-		//if (input.isKeyPressed(Input.KEY_HOME)){ saveScore(); } //DEBUG
+		if (input.isKeyPressed(Input.KEY_HOME)){ saveScore(); } //DEBUG
 		
-		/* NEED PLAYER INFO
-		if (playerScore != this.ac.getScore()){
-			ac.setScore(playerScore);
+		if (playerScore != Account.getScore()){
+			Account.setScore(playerScore);
 		}
-		*/
+		
 	}
 	
 	public int getID(){
 		return 1;
 	}
 	
-	/* NEED PLAYER INFO
 	private void saveScore(){
-		ac.replaceSelected(ac.getUsername(), ac.getPassword(), this.playerScore);
+		Account.replaceSelected(Account.getUsername(), Account.getPassword(), this.playerScore);
 	}
-	*/
+
 }

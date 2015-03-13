@@ -27,7 +27,6 @@ public class Menu extends BasicGameState{
 	private Color uiBlue = new Color(72,104,247);
 	private Color uiRed = new Color(176,32,32);
 	
-	private Play play = new Play(1);
 	
 	public Menu(int state){
 		

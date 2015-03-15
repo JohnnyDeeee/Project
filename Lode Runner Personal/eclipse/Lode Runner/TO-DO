@@ -6,14 +6,14 @@ TO-DO
 	- Create Animations for Player (MUST)
 	- Create Animations for AI (MUST)
 	- Create class for font/color (COULD)
-	- Create Register and Login (watch out using statics...)
 	- Save score to account
-	- Find a way to call account info in Score from Account.java
+	- Disable mouse click (mouse click defocus textfield)
 		
 DOING:
 ----------------
-- Disable mouse click (mouse click defocus textfield)
+
 
 
 NOTES:	Check https://www.youtube.com/watch?v=QYEg_GQT-zw on AI programming
 		Check enterState(id, leave, enter)
+		You can register same name with uppercase or lowercase letters: JohnDoe, johndoe, jOhNdOe (<- this makes 3 different accounts)

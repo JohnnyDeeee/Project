@@ -53,6 +53,7 @@ public class Menu extends BasicGameState {
 		login.setBackgroundColor(Color.darkGray);
 		login.setBorderColor(uiBlue);
 		login.setTextColor(uiRed);
+		login.setMaxLength(15);
 		login.setFocus(true);
 
 		pass = new PasswordTextField(gc, uiFont, 380, login.getY() + 70, 250,

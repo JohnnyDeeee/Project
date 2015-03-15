@@ -1,6 +1,7 @@
 package org.loderunner.screens;
 
 import org.loderunner.table.Account;
+import org.loderunner.table.Level;
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.*;
@@ -12,6 +13,10 @@ public class Play extends BasicGameState{
 	private Color uiRed = new Color(176,32,32);
 	
 	private int playerScore;
+	private int playerLives;
+	private int currentLevel;
+	
+	Level level;
 	
 	public Play(int state){
 		
@@ -27,16 +32,30 @@ public class Play extends BasicGameState{
 		uiFont.getEffects().add(new ColorEffect());
 		uiFont.loadGlyphs();
 		
+		level = new Level("Level1.txt", gc);
 		playerScore = 0;
+		playerLives = 3;
+		currentLevel = 1;
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		g.setBackground(Color.black);
 		
 		//Draw string in specified font
-		uiFont.drawString(100, 500, "SCORE", uiBlue);
-		uiFont.drawString(250, 500, Integer.toString(playerScore), uiRed);
-	}
+		uiFont.drawString(50, 30, "PLAYER: ", uiBlue);
+		uiFont.drawString(170, 30, Account.getUsername(), uiRed);
+		
+		uiFont.drawString(50, 550, "SCORE: ", uiBlue);
+		uiFont.drawString(150, 550, Integer.toString(playerScore), uiRed);
+		
+		uiFont.drawString(300, 550, "LIVES: ", uiBlue);
+		uiFont.drawString(400, 550, Integer.toString(playerLives), uiRed);
+		
+		uiFont.drawString(550, 550, "LEVEL: ", uiBlue);
+		uiFont.drawString(650, 550, Integer.toString(currentLevel), uiRed);
+		
+		level.render(gc.getGraphics());
+		}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
 		Input input = gc.getInput();

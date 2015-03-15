@@ -2,7 +2,6 @@ TO-DO
 ----------------
 
 	- Create dynamic text on Menu screen for keys to be able to change them in Option screen (COULD)
-	- Create HUD (Score, Men, Level) in Play screen (MUST)
 	- Create Animations for Player (MUST)
 	- Create Animations for AI (MUST)
 	- Create class for font/color (COULD)
@@ -11,9 +10,15 @@ TO-DO
 		
 DOING:
 ----------------
+- Create HUD (Score, Men, Level) in Play screen
+	- Basic Hud done
 
+- Create level editor
+	- Create telesladder
+
+- Create player
 
 
 NOTES:	Check https://www.youtube.com/watch?v=QYEg_GQT-zw on AI programming
 		Check enterState(id, leave, enter)
-		You can register same name with uppercase or lowercase letters: JohnDoe, johndoe, jOhNdOe (<- this makes 3 different accounts)
+		You can register same name with uppercase or lowercase letters: JohnDoe, johndoe, jOhNdOe (<- this makes 3 different account

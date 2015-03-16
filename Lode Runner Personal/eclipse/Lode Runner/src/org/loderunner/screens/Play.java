@@ -10,7 +10,7 @@ import org.newdawn.slick.state.*;
 
 public class Play extends BasicGameState{
 	
-	UnicodeFont uiFont;
+	private UnicodeFont uiFont;
 	private Color uiBlue = new Color(72,104,247);
 	private Color uiRed = new Color(176,32,32);
 	
@@ -18,7 +18,13 @@ public class Play extends BasicGameState{
 	private int playerLives;
 	private int currentLevel;
 	
-	Level level;
+	private Level level;
+	
+	private float playerX;
+	private float playerY;
+	
+	private SpriteSheet run_right_sheet, run_left_sheet, climb_sheet;
+	private Animation player_animation, run_right_animation, run_left_animation, climb_animation;
 	
 	public Play(int state){
 		
@@ -38,6 +44,17 @@ public class Play extends BasicGameState{
 		playerScore = 0;
 		playerLives = 3;
 		currentLevel = 1;
+		
+		playerX = 112.0f;
+		playerY = 452.0f;
+		
+		run_right_sheet = new SpriteSheet("res/player/run_right.png", 32, 32);
+		run_left_sheet = new SpriteSheet(run_right_sheet.getFlippedCopy(true, false), 32, 32);
+		climb_sheet = new SpriteSheet("res/player/climb.png", 32, 32);
+		run_right_animation = new Animation(run_right_sheet, 150);
+		run_left_animation = new Animation(run_left_sheet, 150);
+		climb_animation = new Animation(climb_sheet, 150);
+		player_animation = run_right_animation;
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
@@ -57,7 +74,10 @@ public class Play extends BasicGameState{
 		uiFont.drawString(650, 550, Integer.toString(currentLevel), uiRed);
 		
 		level.render(gc.getGraphics());
-		}
+		
+		player_animation.draw(playerX, playerY);
+		player_animation.stop();
+	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
 		Input input = gc.getInput();
@@ -70,8 +90,24 @@ public class Play extends BasicGameState{
 			}
 		}
 		
-		if (input.isKeyDown(Input.KEY_UP)){ playerScore += 1; } //DEBUG
-		if (input.isKeyDown(Input.KEY_DOWN)){ playerScore -= 1; } //DEBUG
+		if (input.isKeyDown(Input.KEY_RIGHT)){
+			player_animation = run_right_animation;
+			player_animation.start();
+			playerX += 0.1f;
+		}else if (input.isKeyDown(Input.KEY_LEFT)){
+			player_animation = run_left_animation;
+			player_animation.start();
+			playerX -= 0.1f;
+		}else if (input.isKeyDown(Input.KEY_UP)){
+			player_animation = climb_animation;
+			player_animation.start();
+			playerY -= 0.1f;
+		}else if (input.isKeyDown(Input.KEY_DOWN)){
+			player_animation = climb_animation;
+			player_animation.start();
+			playerY += 0.1f;
+		}
+		
 		if (input.isKeyPressed(Input.KEY_HOME)){ saveScore(); } //DEBUG
 		if (input.isKeyPressed(Input.KEY_1)){ level.telesladderActive = true; }//DEBUG
 		if (input.isKeyPressed(Input.KEY_2)){ level.telesladderActive = false; }//DEBUG
@@ -80,6 +116,7 @@ public class Play extends BasicGameState{
 			Account.setScore(playerScore);
 		}
 		
+		player_animation.update(delta);
 	}
 	
 	public int getID(){

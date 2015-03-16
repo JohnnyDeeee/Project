@@ -46,7 +46,7 @@ public class Menu extends BasicGameState {
 		uiFont.loadGlyphs();
 
 		// background
-		menuBackground = new Image("res/intro.png");
+		menuBackground = new Image("res/screens/intro.png");
 
 		// TextFields
 		login = new TextField(gc, uiFont, 380, 360, 250, 30);

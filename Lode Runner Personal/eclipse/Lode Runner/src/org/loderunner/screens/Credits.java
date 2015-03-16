@@ -14,7 +14,7 @@ public class Credits extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		gc.setShowFPS(false);
 		
-		creditsBackground = new Image("res/Credits.png");
+		creditsBackground = new Image("res/screens/Credits.png");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{

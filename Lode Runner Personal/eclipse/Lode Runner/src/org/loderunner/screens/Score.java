@@ -26,7 +26,7 @@ public class Score extends BasicGameState{
 		uiFont.getEffects().add(new ColorEffect());
 		uiFont.loadGlyphs();
 		
-		scoreBackground = new Image("res/Highscores.png");
+		scoreBackground = new Image("res/screens/Highscores.png");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{

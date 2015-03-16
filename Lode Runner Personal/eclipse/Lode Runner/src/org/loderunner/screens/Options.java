@@ -14,7 +14,7 @@ public class Options extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		gc.setShowFPS(false);
 		
-		optionsBackground = new Image("res/Options.png");
+		optionsBackground = new Image("res/screens/Options.png");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{

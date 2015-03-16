@@ -1,5 +1,7 @@
 package org.loderunner.screens;
 
+import javax.swing.JOptionPane;
+
 import org.loderunner.table.Account;
 import org.loderunner.table.Level;
 import org.newdawn.slick.*;
@@ -60,9 +62,19 @@ public class Play extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
 		Input input = gc.getInput();
 		
+		if (input.isKeyPressed(Input.KEY_ESCAPE)){ 
+			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? Your session will end and your score will be saved.", "Are you sure?", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION){
+				saveScore();
+				gc.exit();
+			}
+		}
+		
 		if (input.isKeyDown(Input.KEY_UP)){ playerScore += 1; } //DEBUG
 		if (input.isKeyDown(Input.KEY_DOWN)){ playerScore -= 1; } //DEBUG
 		if (input.isKeyPressed(Input.KEY_HOME)){ saveScore(); } //DEBUG
+		if (input.isKeyPressed(Input.KEY_1)){ level.telesladderActive = true; }//DEBUG
+		if (input.isKeyPressed(Input.KEY_2)){ level.telesladderActive = false; }//DEBUG
 		
 		if (playerScore != Account.getScore()){
 			Account.setScore(playerScore);

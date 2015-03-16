@@ -1,18 +1,21 @@
 TO-DO
 ----------------
 
-	
+	- Create AI
 	- Create Animations for AI
 	- Disable mouse click (mouse click defocus textfield)
 	- Create HUD (Score, Men, Level) in Play screen
 		- Basic Hud done
 		- Settings to quit? (in Play screen)
+	- Create pickup score
+	- Save highscore
+	- Highscore screen show top 10
+	- Create collision
 		
 DOING:
 ----------------
 - Create player and animations
-	- Create animation for bars
-	- Create animation for falling
+	- Create mechanic for falling animation
 
 
 

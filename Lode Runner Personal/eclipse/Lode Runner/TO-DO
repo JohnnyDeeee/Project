@@ -15,8 +15,9 @@ TO-DO
 DOING:
 ----------------
 - Create player and animations
-	- Create mechanic for falling animation
-
+	- Create mechanic for falling animation (need collision but can change direction of animation)
+- Create collision detection
+	- Check for each object in bbox list (now i can only climb first 32x32 ladder)
 
 
 

@@ -1,11 +1,17 @@
 package org.loderunner.screens;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.swing.JOptionPane;
 
+import org.loderunner.entities.Player;
 import org.loderunner.table.Account;
 import org.loderunner.table.Level;
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.*;
 
 public class Play extends BasicGameState{
@@ -19,12 +25,14 @@ public class Play extends BasicGameState{
 	private int currentLevel;
 	
 	private Level level;
+	private Player player;
+	
+	private Animation run_right, run_left, ladder_climb, bar_climb, falling, idle_right, idle_left;
 	
 	private float playerX;
 	private float playerY;
+	private boolean canClimb;
 	
-	private SpriteSheet run_right_sheet, run_left_sheet, ladder_climb_sheet, bar_climb_sheet, falling_sheet, idle_right_sheet, idle_left_sheet;
-	private Animation player_animation, run_right_animation, run_left_animation, ladder_climb_animation, bar_climb_animation, falling_animation, idle_right_animation, idle_left_animation;
 	
 	public Play(int state){
 		
@@ -47,24 +55,14 @@ public class Play extends BasicGameState{
 		
 		playerX = 112.0f;
 		playerY = 452.0f;
-		
-		run_right_sheet = new SpriteSheet("res/player/run_right.png", 32, 32);
-		run_left_sheet = new SpriteSheet(run_right_sheet.getFlippedCopy(true, false), 32, 32);
-		ladder_climb_sheet = new SpriteSheet("res/player/ladder_climb.png", 32, 32);
-		bar_climb_sheet = new SpriteSheet("res/player/bar_climb.png", 32, 32);
-		falling_sheet = new SpriteSheet("res/player/falling.png", 32, 32);
-		idle_right_sheet = new SpriteSheet("res/player/idle_right.png", 32, 32);
-		idle_left_sheet = new SpriteSheet(idle_right_sheet.getFlippedCopy(true, false),  32, 32);
-		
-		run_right_animation = new Animation(run_right_sheet, 150);
-		run_left_animation = new Animation(run_left_sheet, 150);
-		ladder_climb_animation = new Animation(ladder_climb_sheet, 150);
-		bar_climb_animation = new Animation(bar_climb_sheet, 250);
-		falling_animation = new Animation(falling_sheet, 200);
-		idle_right_animation = new Animation(idle_right_sheet, 800);
-		idle_left_animation = new Animation(idle_left_sheet, 800);
-		
-		player_animation = run_right_animation;
+		player = new Player(playerX, playerY, gc);
+		run_right = player.getAnimation().get(0);
+		run_left = player.getAnimation().get(1);
+		ladder_climb = player.getAnimation().get(2);
+		bar_climb = player.getAnimation().get(3);
+		falling = player.getAnimation().get(4);
+		idle_right = player.getAnimation().get(5);
+		idle_left = player.getAnimation().get(6);
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
@@ -85,11 +83,13 @@ public class Play extends BasicGameState{
 		
 		level.render(gc.getGraphics());
 		
-		player_animation.draw(playerX, playerY);
-		//player_animation.stop();
+		player.render(gc, sbg, g);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{		
+		player.update(gc, sbg, delta);
+		player.boundingbox.setLocation(playerX, playerY);
+		
 		Input input = gc.getInput();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)){ 
@@ -100,54 +100,60 @@ public class Play extends BasicGameState{
 			}
 		}
 		
+		collisionDetection();
+		
+		float move = (float)(100*(delta/1000.0));
 		if (input.isKeyDown(Input.KEY_RIGHT)){
-			player_animation = run_right_animation;
-			player_animation.start();
-			playerX += 0.1f;
+			player.setAnimation(run_right);
+			player.startAnimation();
+			player.setPos(playerX += move, playerY);
 		}else if (input.isKeyDown(Input.KEY_LEFT)){
-			player_animation = run_left_animation;
-			player_animation.start();
-			playerX -= 0.1f;
-		}else if (input.isKeyDown(Input.KEY_UP)){
-			player_animation = ladder_climb_animation;
-			player_animation.start();
-			playerY -= 0.1f;
+			player.setAnimation(run_left);
+			player.startAnimation();
+			player.setPos(playerX -= move, playerY);
+		}else if (input.isKeyDown(Input.KEY_UP) && canClimb){
+			player.setAnimation(ladder_climb);
+			player.startAnimation();
+			player.setPos(playerX, playerY -= move);
 		}else if (input.isKeyDown(Input.KEY_DOWN)){
-			player_animation = ladder_climb_animation;
-			player_animation.start();
-			playerY += 0.1f;
+			player.setAnimation(ladder_climb);
+			player.startAnimation();
+			player.setPos(playerX, playerY += move);
 		}else if (input.isKeyDown(Input.KEY_Z)){
-			player_animation = bar_climb_animation;
-			player_animation.start();
-			playerX -= 0.05f;
+			player.setAnimation(bar_climb);
+			player.startAnimation();
+			player.setPos(playerX -= move/2, playerY);
 		}else if (input.isKeyDown(Input.KEY_X)){
-			player_animation = bar_climb_animation;
-			player_animation.start();
-			playerX += 0.05f;
+			player.setAnimation(bar_climb);
+			player.startAnimation();
+			player.setPos(playerX += move/2, playerY);
 		}else if (input.isKeyDown(Input.KEY_C)){
-			player_animation = falling_animation;
-			player_animation.setLooping(false);
-			player_animation.start();
-			playerY += 0.05f;
+			player.setAnimation(falling);
+			player.getCurrentAnimation().setLooping(false);
+			player.startAnimation();
+			//set looping false
+			player.setPos(playerX, playerY += move);
 		}else{
-			if (player_animation.equals(run_left_animation)){
-				player_animation = idle_left_animation;
-				player_animation.start();
-			}else if (player_animation.equals(run_right_animation)){
-				player_animation = idle_right_animation;
-				player_animation.start();
+			if (player.equals(run_right)){
+				player.setAnimation(idle_right);
+				player.startAnimation();
+			}else if (player.equals(run_left)){
+				player.setAnimation(idle_left);
+				player.startAnimation();
+			}else if (player.equals(ladder_climb) || player.equals(bar_climb)){
+				player.stopAnimation();
 			}
 		}
 		
-		if (input.isKeyPressed(Input.KEY_HOME)){ System.out.println(player_animation.getCurrentFrame()); } //DEBUG
+		//if (input.isKeyPressed(Input.KEY_HOME)){ System.out.println(player_animation.getCurrentFrame()); } //DEBUG
 		if (input.isKeyPressed(Input.KEY_1)){ level.telesladderActive = true; }//DEBUG
 		if (input.isKeyPressed(Input.KEY_2)){ level.telesladderActive = false; }//DEBUG
+		System.out.println(canClimb); //DEBUG
 		
 		if (playerScore != Account.getScore()){
 			Account.setScore(playerScore);
 		}
 		
-		player_animation.update(delta);
 	}
 	
 	public int getID(){
@@ -156,6 +162,16 @@ public class Play extends BasicGameState{
 	
 	private void saveScore(){
 		Account.replaceSelected(Account.getUsername(), Account.getPassword(), this.playerScore);
+	}
+	
+	private void collisionDetection(){
+		for (Shape object : level.ladder_bbox){
+			if (player.boundingbox.intersects(object)){
+				canClimb = true;
+			}else{
+				canClimb = false;
+			}
+		}
 	}
 
 }

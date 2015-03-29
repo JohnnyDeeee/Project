@@ -115,7 +115,7 @@ public class Play extends BasicGameState{
 			player.setAnimation(ladder_climb);
 			player.startAnimation();
 			player.setPos(playerX, playerY -= move);
-		}else if (input.isKeyDown(Input.KEY_DOWN)){
+		}else if (input.isKeyDown(Input.KEY_DOWN) && canClimb){
 			player.setAnimation(ladder_climb);
 			player.startAnimation();
 			player.setPos(playerX, playerY += move);
@@ -148,7 +148,8 @@ public class Play extends BasicGameState{
 		//if (input.isKeyPressed(Input.KEY_HOME)){ System.out.println(player_animation.getCurrentFrame()); } //DEBUG
 		if (input.isKeyPressed(Input.KEY_1)){ level.telesladderActive = true; }//DEBUG
 		if (input.isKeyPressed(Input.KEY_2)){ level.telesladderActive = false; }//DEBUG
-		System.out.println(canClimb); //DEBUG
+		System.out.println("canClimb = " + canClimb); //DEBUG
+		
 		
 		if (playerScore != Account.getScore()){
 			Account.setScore(playerScore);
@@ -165,11 +166,32 @@ public class Play extends BasicGameState{
 	}
 	
 	private void collisionDetection(){
-		for (Shape object : level.ladder_bbox){
-			if (player.boundingbox.intersects(object)){
+		/*
+		for (int i = 0; i < level.ladder_bbox.size(); i++){
+			if (player.boundingbox.intersects(level.ladder_bbox.get(i)) && !canClimb){
 				canClimb = true;
-			}else{
+			}
+		}
+		
+		for (int i = 0; i < level.void_bbox.size(); i++){
+			if (Math.round(player.boundingbox.getMaxY()) == Math.round(level.void_bbox.get(i).getMaxY()) && canClimb){
+				//System.out.println("void maxY = " + level.void_bbox.get(i).getMaxY()); //DEBUG
 				canClimb = false;
+			}
+		}
+		*/
+
+		for (int i = 0; i < level.ladder_bbox.size(); i++){
+			if (player.boundingbox.intersects(level.ladder_bbox.get(i)) && !canClimb){
+				canClimb = true;
+			}
+		}
+		
+		for (int i = 0; i < level.void_bbox.size(); i++){
+			if (player.boundingbox.getCenterX() >= level.void_bbox.get(i).getMinX() && player.boundingbox.getCenterX() <= level.void_bbox.get(i).getMaxX()){
+				if (player.boundingbox.getMaxY() <= level.void_bbox.get(i).getMaxY() && player.boundingbox.getMaxY() >= level.void_bbox.get(i).getMinY()){
+					canClimb = false;
+				}
 			}
 		}
 	}

@@ -54,7 +54,7 @@ public class Play extends BasicGameState{
 		currentLevel = 1;
 		
 		playerX = 112.0f;
-		playerY = 452.0f;
+		playerY = 451.0f;
 		player = new Player(playerX, playerY, gc);
 		run_right = player.getAnimation().get(0);
 		run_left = player.getAnimation().get(1);
@@ -119,6 +119,12 @@ public class Play extends BasicGameState{
 			player.setAnimation(ladder_climb);
 			player.startAnimation();
 			player.setPos(playerX, playerY += move);
+			//TESTING -->
+		}else if (input.isKeyPressed(Input.KEY_DOWN) && !canClimb){
+			//player.setAnimation(ladder_climb);
+			//player.startAnimation();
+			player.setPos(playerX, playerY + 1);
+			//TESTING <--
 		}else if (input.isKeyDown(Input.KEY_Z)){
 			player.setAnimation(bar_climb);
 			player.startAnimation();
@@ -166,21 +172,6 @@ public class Play extends BasicGameState{
 	}
 	
 	private void collisionDetection(){
-		/*
-		for (int i = 0; i < level.ladder_bbox.size(); i++){
-			if (player.boundingbox.intersects(level.ladder_bbox.get(i)) && !canClimb){
-				canClimb = true;
-			}
-		}
-		
-		for (int i = 0; i < level.void_bbox.size(); i++){
-			if (Math.round(player.boundingbox.getMaxY()) == Math.round(level.void_bbox.get(i).getMaxY()) && canClimb){
-				//System.out.println("void maxY = " + level.void_bbox.get(i).getMaxY()); //DEBUG
-				canClimb = false;
-			}
-		}
-		*/
-
 		for (int i = 0; i < level.ladder_bbox.size(); i++){
 			if (player.boundingbox.intersects(level.ladder_bbox.get(i)) && !canClimb){
 				canClimb = true;
@@ -194,6 +185,19 @@ public class Play extends BasicGameState{
 				}
 			}
 		}
+		
+		//TESTING -->
+		for (int i = 0; i < level.block_bbox.size(); i++){
+			if (player.boundingbox.getMinX() > level.block_bbox.get(i).getMinX() && player.boundingbox.getMinX() < level.block_bbox.get(i).getMaxX()){
+				player.setPos(playerX + 1, playerY); //player doesnt shoot back x+1...
+				//System.out.println("Player is intersecting with block bbox");
+			}
+			
+			if (player.boundingbox.getMaxY() > level.block_bbox.get(i).getMinY() && player.boundingbox.getMaxY() < level.block_bbox.get(i).getMaxY()){
+				player.setPos(playerX, playerY - 1);
+			}
+		}
+		//TESTING <--
 	}
 
 }

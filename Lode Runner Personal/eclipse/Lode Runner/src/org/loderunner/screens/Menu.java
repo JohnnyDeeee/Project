@@ -61,6 +61,7 @@ public class Menu extends BasicGameState {
 		pass.setBackgroundColor(Color.darkGray);
 		pass.setBorderColor(uiBlue);
 		pass.setTextColor(uiRed);
+		pass.setMaxLength(45);
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)

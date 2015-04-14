@@ -48,7 +48,7 @@ public class Play extends BasicGameState{
 		uiFont.getEffects().add(new ColorEffect());
 		uiFont.loadGlyphs();
 		
-		level = new Level("Level1.txt", gc);
+		level = new Level("TestLevel.txt", gc); //Voor toets
 		playerScore = 0;
 		playerLives = 3;
 		currentLevel = 1;
@@ -73,13 +73,16 @@ public class Play extends BasicGameState{
 		uiFont.drawString(170, 30, Account.getUsername(), uiRed);
 		
 		uiFont.drawString(50, 550, "SCORE: ", uiBlue);
-		uiFont.drawString(150, 550, Integer.toString(playerScore), uiRed);
+		//uiFont.drawString(150, 550, Integer.toString(playerScore), uiRed);
+		uiFont.drawString(150, 550, "n.v.t", uiRed); //voor toets
 		
 		uiFont.drawString(300, 550, "LIVES: ", uiBlue);
-		uiFont.drawString(400, 550, Integer.toString(playerLives), uiRed);
+		//uiFont.drawString(400, 550, Integer.toString(playerLives), uiRed);
+		uiFont.drawString(400, 550, "n.v.t", uiRed); //voor toets
 		
 		uiFont.drawString(550, 550, "LEVEL: ", uiBlue);
-		uiFont.drawString(650, 550, Integer.toString(currentLevel), uiRed);
+		//uiFont.drawString(650, 550, Integer.toString(currentLevel), uiRed);
+		uiFont.drawString(650, 550, "TestLevel", uiRed); // voor toets
 		
 		level.render(gc.getGraphics());
 		
